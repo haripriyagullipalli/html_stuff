@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head> </head>
+
+<body style="background-color: #b8e0d2;">
+  <header>
+    <h1 style="text-align: center;">Memory Allocation in JS</h1>
+  </header>
+  <main>
+    <section id="memory_life_cycle" style="background: white;
+    padding: 20px;
+    margin: 20px;
+    border: 2px solid whitesmoke;
+    border-radius: 8px;">
+      <h1>Memory LifeCycle</h1>
+      <img src="https://felixgerschau.com/static/87cb911a5bdda814cdc38a1679e327e5/29007/memory-life-cycle.png"
+        style="float: left; " width="800px" /img>
+      <ol>
+        <li>
+          <h3>Memory Allocation:</h2>
+            <ul>
+              <li>
+                Memory is reserved for variables, objects, and arrays when they are
+                created.
+              </li>
+              <li>
+                Primitives are stored directly in memory, while objects and arrays
+                are stored on the heap, with references on the stack.
+              </li>
+            </ul>
+        </li>
+        <li>
+          <h3>Memory Usage:</h2>
+            <ul>
+              <li>
+                During execution, the program actively reads from and writes to
+                memory.
+              </li>
+              <li>
+                Variables and objects are accessed and manipulated based on their
+                scope and references.
+              </li>
+            </ul>
+        </li>
+        <li>
+          <h3>Memory Deallocation:</h2>
+            <ul>
+              <li>
+                When memory is no longer needed (e.g., no references to an object),
+                it is marked for garbage collection.
+              </li>
+              <li>
+                The JavaScript engine automatically frees memory when it determines
+                that an object is no longer in use.
+              </li>
+            </ul>
+        </li>
+      </ol>
+    </section>
+    <section style="background: white;
+    padding: 20px;
+    margin: 20px;
+    border: 2px solid whitesmoke;
+    border-radius: 8px;
+    ">
+      <img
+        src="https://img.freepik.com/free-photo/top-view-memory-concept-with-green-post-its_23-2149320983.jpg?t=st=1739384657~exp=1739388257~hmac=e34e071f15f9205289f5977ecaa1f28bd510bd269b28f76ac9bf0c38914c68c2&w=2000"
+        style="float: right;height:700px; width:800px; padding-right: 10px;" />
+
+      <h1>Memory Allocation in a JavaScript Program</h2>
+        <h2 style="font-weight:lighter;">Step 1: OS Allocates Memory to Deno (or Any JavaScript Runtime)</h2>
+        <ul>
+          <li>When a JavaScript program starts, Deno requests memory from the OS.</li>
+          <li>The OS provides a block of memory (RAM) to Deno.</li>
+          <li>This memory is divided into different regions:
+            <ul>
+              <li>Code Segment: Stores the compiled code.</li>
+              <li>Stack Segment: Stores function calls and local variables.</li>
+              <li>Heap Segment: Stores objects and dynamically allocated data.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h2 style="font-weight:lighter;">Step 2: JavaScript Engine (V8) Manages Memory</h2>
+        <ul>
+          <li>Inside Deno, the V8 engine handles memory management.</li>
+          <li>V8 divides memory into Stack and Heap:
+            <ul>
+              <li>Stack: Fixed size, fast access, stores local variables and function calls.</li>
+              <li>Heap: Flexible size, stores objects, arrays, and closures.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h2 style="font-weight:lighter;">Step 3: Execution & Memory Usage</h2>
+        <ul>
+          <li>When functions are called, a new stack frame is created in the Stack.</li>
+          <li>Objects and arrays are stored in the Heap.</li>
+          <li>The Call Stack grows and shrinks as functions execute.</li>
+        </ul>
+
+        <h2 style=font-weight:lighter;"">Step 4: Memory Cleanup (Garbage Collection)</h2>
+        <ul>
+          <li>When variables and objects are no longer needed, JavaScript frees memory using Garbage Collection (GC).
+          </li>
+          <li>V8 uses Mark-and-Sweep Garbage Collection to remove unused objects.</li>
+        </ul>
+
+        <h2 style="font-weight:lighter;">Step 5: Releasing Memory Back to OS</h2>
+        <ul>
+          <li>If JavaScript (Deno) no longer needs memory, V8 returns unused memory to the OS.</li>
+          <li>This ensures efficient memory usage and prevents memory leaks.</li>
+        </ul>
+    </section>
+    <section style="background: white;
+   padding: 30px;
+   margin: 20px;
+   border: 2px solid whitesmoke;
+   border-radius: 8px;
+   display: flex;
+  
+   ">
+      <section style="height: 700px; width: 30%; display: inline-block;">
+        <h2 style="text-align: center;">JavaScript Memory Allocation Example</h2>
+        <div style="height: 40%;width: 90%;border-bottom: 1px solid black;
+        border-top:  0.5px solid black;
+        margin: auto;">
+          <pre style="font-size: 20px;"><em>function example() {
+          let x = 10;  
+          let arr = [1, 2, 3]; 
+          let obj = { key: 'value' }; 
+          let y = 20; 
+          return arr[0];
+        }
+
+example();
+</em>
+</pre>
+        </div>
+        <table border="1" style="border-collapse: collapse; width:500px; text-align: center;">
+          <caption>Stack</caption>
+          <tr>
+              <th>Variable</th>
+              <th>Reference (Memory Address)</th>
+          </tr>
+          <tr>
+              <td>x</td>
+              <td>Reference to heap memory (0x01)</td>
+          </tr>
+          <tr>
+              <td>arr</td>
+              <td>Reference to array in heap (0x02)</td>
+          </tr>
+          <tr>
+              <td>obj</td>
+              <td>Reference to object in heap (0x03)</td>
+          </tr>
+          <tr>
+              <td>y</td>
+              <td>Reference to heap memory (0x04)</td>
+          </tr>
+      </table>
+      <table border="1" style="border-collapse: collapse; width:500px; text-align: center;">
+        <caption>Heap</caption>
+        <tr>
+            <th>Reference (Memory Address)</th>
+            <th>Stored Data</th>
+        </tr>
+        <tr>
+            <td>0x01</td>
+            <td>10 (stored by x)</td>
+        </tr>
+        <tr>
+            <td>0x02</td>
+            <td>[1, 2, 3] (stored by arr)</td>
+        </tr>
+        <tr>
+            <td>0x03</td>
+            <td>{ key: 'value' } (stored by obj)</td>
+        </tr>
+        <tr>
+            <td>0x04</td>
+            <td>20 (stored by y)</td>
+        </tr>
+    </table>
+    
+      </section>
+      <section style="height: 700px; width: 65%; margin-left: 100px; font-size: 18px;border-left: 1px solid black;padding-left: 30px;">
+
+    <h2 style="font-style: italic;">☞Explanation</h2>
+    <p>
+        In JavaScript, the <strong>stack memory</strong> and <strong>heap memory</strong> are used to store different kinds of data.
+    </p>
+
+    <h3>Stack Memory</h3>
+    <p>
+        The stack holds references (or memory addresses) to the actual data stored in the heap. When the function example() is called:
+        <ul>
+            <li><strong>x</strong> in the stack holds a reference to the value stored in the heap. This reference points to memory location 0x01, where the value 10 is stored.</li>
+            <li><strong>arr</strong> in the stack holds a reference to the array stored in the heap, located at memory address 0x02. The actual array is [1, 2, 3].</li>
+            <li><strong>obj</strong> in the stack holds a reference to the object stored in the heap, located at memory address 0x03. The actual object is { key: 'value' }.</li>
+            <li><strong>y</strong> in the stack holds a reference to the value stored in the heap at address 0x04, which is 20.</li>
+        </ul>
+    </p>
+
+    <h3>Heap Memory</h3>
+    <p>
+        The heap is where the actual data is stored. The stack only holds references to this data:
+        <ul>
+            <li>The value 10 is stored in the heap at memory location 0x01, referenced by <strong>x</strong>.</li>
+            <li>The array [1, 2, 3] is stored in the heap at memory location 0x02, referenced by <strong>arr</strong>.</li>
+            <li>The object { key: 'value' } is stored in the heap at memory location 0x03, referenced by <strong>obj</strong>.</li>
+            <li>The value 20 is stored in the heap at memory location 0x04, referenced by <strong>y</strong>.</li>
+        </ul>
+    </p>
+
+    <h3>After Function Execution</h3>
+    <p>
+        Once the function example() completes:
+        <ul>
+            <li>The stack frame is cleared, meaning the references to the variables <strong>x</strong>, <strong>arr</strong>, <strong>obj</strong>, and <strong>y</strong> are removed from the stack.</li>
+            <li>However, the data stored in the heap remains intact until it is no longer referenced and is eventually cleaned up by JavaScript's garbage collector.</li>
+        </ul>
+    </p>
+      </section>
+      </section>
+  </main>
+</body>
+
+</html>
